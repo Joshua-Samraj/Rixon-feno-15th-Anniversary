@@ -28,12 +28,10 @@
   }
   ::selection{background:var(--gold); color:var(--ivory);}
 
-  /* Prevent scrolling while popup is open */
   body.no-scroll {
     overflow: hidden;
   }
 
-  /* ---------- ENTRY POPUP ---------- */
   .popup-overlay {
     position: fixed;
     inset: 0;
@@ -219,7 +217,6 @@
   }
   @keyframes cue{ to{ top:100%; } }
 
-  /* ---------- DETAILS SECTION ---------- */
   .details{
     position:relative;
     padding:14vh 6vw 16vh;
@@ -247,7 +244,6 @@
   }
   .details .rule{ background:linear-gradient(90deg, transparent, var(--gold-bright), transparent); }
 
-  /* ---------- VIEW INVITATION BUTTON ---------- */
   .view-invite-btn{
     font-family:'Jost', sans-serif;
     letter-spacing:0.2em;
@@ -270,7 +266,6 @@
     border-color:var(--gold-bright);
   }
 
-  /* ---------- INVITATION MODAL ---------- */
   .invite-modal{
     position:fixed;
     inset:0;
@@ -362,7 +357,6 @@
     color: var(--gold-bright); 
   }
 
-  /* ---------- ACTION BUTTONS ---------- */
   .action-buttons {
     display: flex;
     gap: 16px;
@@ -413,6 +407,16 @@
     text-transform:uppercase;
     color:var(--gold);
     font-weight: 600;
+  }
+  
+  .design-credit {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    opacity: 0.6;
+    margin-top: 40px;
   }
 
   .music-panel{
@@ -502,14 +506,12 @@
 </head>
 <body class="no-scroll"> 
 
-<!-- START POPUP OVERLAY -->
 <div class="popup-overlay" id="welcome-popup">
   <div class="popup-content">
     <p class="popup-quote">“A successful marriage requires falling in love many times, always with the same person.”</p>
     <button class="popup-btn" id="enter-btn">See invitation</button>
   </div>
 </div>
-<!-- END POPUP OVERLAY -->
 
 <div class="hero-sequence">
   <section class="hero" id="hero">
@@ -558,7 +560,6 @@
   </div>
 </section>
 
-<!-- INVITATION IMAGE MODAL -->
 <div class="invite-modal" id="invite-modal">
   <div class="invite-modal-inner">
     <button class="invite-modal-close" id="invite-modal-close" aria-label="Close">&times;</button>
@@ -571,6 +572,7 @@
   <div class="diamond"></div>
   <div class="rule"></div>
   <div class="signature">Rixon &amp; Feno</div>
+  <div class="design-credit">Designed by Diginest</div>
 </footer>
 
 <div class="music-panel has-track" id="music-panel">
@@ -584,7 +586,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RWHJZWBLX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -595,14 +596,12 @@
 </script>
 
 <script>
-// ---------- CORE UI (runs regardless of whether GSAP/CDN scripts loaded) ----------
 const audio = document.getElementById('bg-audio');
 const playToggle = document.getElementById('play-toggle');
 const playIcon = document.getElementById('play-icon');
 const pauseIcon = document.getElementById('pause-icon');
 audio.volume = 0.55;
 
-// ---------- POPUP & MUSIC LOGIC ----------
 const popupOverlay = document.getElementById('welcome-popup');
 const enterBtn = document.getElementById('enter-btn');
 let musicStarted = false;
@@ -639,7 +638,6 @@ playToggle.addEventListener('click', (e) => {
   }
 });
 
-// ---------- INVITATION MODAL LOGIC ----------
 const inviteModal = document.getElementById('invite-modal');
 const viewInviteBtn = document.getElementById('view-invite-btn');
 const inviteModalClose = document.getElementById('invite-modal-close');
@@ -650,7 +648,7 @@ function openInviteModal(){
 }
 function closeInviteModal(){
   inviteModal.classList.remove('open');
-  if (popupOverlay.style.visibility !== 'hidden') return; // keep locked if entry popup still open
+  if (popupOverlay.style.visibility !== 'hidden') return; 
   document.body.classList.remove('no-scroll');
 }
 
@@ -663,15 +661,12 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && inviteModal.classList.contains('open')) closeInviteModal();
 });
 
-// Safety net: if the entry popup is somehow still blocking the page after 6s
-// (e.g. a slow network), unlock scrolling so the rest of the site is reachable.
 setTimeout(() => {
   if (popupOverlay.style.visibility !== 'hidden') {
     document.body.classList.remove('no-scroll');
   }
 }, 6000);
 
-// ---------- PAGE ANIMATIONS (optional — only if GSAP loaded successfully) ----------
 if (window.gsap && window.ScrollTrigger) {
   gsap.registerPlugin(ScrollTrigger);
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -705,15 +700,11 @@ if (window.gsap && window.ScrollTrigger) {
     opacity:0, y:18, duration:0.8, stagger:0.1, ease:"power2.out",
     scrollTrigger:{ trigger:".detail-grid", start:"top 82%" }
   });
-  gsap.from("footer .quote, footer .diamond, footer .rule, footer .signature", {
+  gsap.from("footer .quote, footer .diamond, footer .rule, footer .signature, footer .design-credit", {
     opacity:0, y:14, duration:0.9, stagger:0.08,
     scrollTrigger:{ trigger:"footer", start:"top 85%" }
   });
 
-  // Buttons are NOT scroll-animated (opacity:0 on a trigger that fails to fire
-  // has caused buttons to appear invisible on some devices). They're visible
-  // by default via CSS; refreshing ScrollTrigger after full load/font-load
-  // keeps the remaining text animations accurate instead.
   window.addEventListener('load', () => ScrollTrigger.refresh());
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => ScrollTrigger.refresh());
