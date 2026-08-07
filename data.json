@@ -1,0 +1,49 @@
+{
+  "document": {
+    "title": "Fifteen Years — Rixon & Feno"
+  },
+  "popup": {
+    "quote": "“A successful marriage requires falling in love many times, always with the same person.”",
+    "buttonText": "Enter Journey"
+  },
+  "hero": {
+    "monoText": "A & M — FIFTEEN YEARS TOGETHER",
+    "numberHtml": "15<sup>TH</sup>",
+    "subtitle": "Wedding Anniversary",
+    "namesHtml": "Rixon <span class=\"amp\">&amp;</span> Feno",
+    "tagline": "Two lives, one journey — join us as we celebrate fifteen years of love, laughter, and everything in between.",
+    "scrollCue": "Scroll to begin"
+  },
+  "ringSection": {
+    "progressLabel": "Our Story · 2011 — 2026",
+    "milestones": [
+      { "year": "2011", "moment": "Where it all began", "imageSrc": "https://picsum.photos/id/1015/512/691" },
+      { "year": "2013", "moment": "Our first home together", "imageSrc": "https://picsum.photos/id/1016/512/691" },
+      { "year": "2015", "moment": "Laughter through every season", "imageSrc": "https://picsum.photos/id/1018/512/691" },
+      { "year": "2017", "moment": "A family grows", "imageSrc": "https://picsum.photos/id/1019/512/691" },
+      { "year": "2019", "moment": "Adventures, near and far", "imageSrc": "https://picsum.photos/id/1020/512/691" },
+      { "year": "2021", "moment": "Steady through the storms", "imageSrc": "https://picsum.photos/id/1021/512/691" },
+      { "year": "2023", "moment": "Still choosing each other", "imageSrc": "https://picsum.photos/id/1022/512/691" },
+      { "year": "2026", "moment": "Fifteen years, one heart", "imageSrc": "https://picsum.photos/id/1023/512/691" }
+    ]
+  },
+  "details": {
+    "eyebrow": "You Are Cordially Invited",
+    "heading": "Celebrate With Us",
+    "imageSrc": "images/invitation_1.png",
+    "inviteLineHtml": "Fifteen years ago we said <em>“I do.”</em> Now, surrounded by the people who mean the most to us, we'd love for you to raise a glass to the years behind us — and the ones still to come.",
+    "date": "Saturday, 15th August 2026",
+    "time": "10:00 PM onwards",
+    "venue": "The Crimson Hall, Taj Coromandel, Chennai",
+    
+    "rsvp": "Kindly RSVP by 1st August 2026 · +91 98XXX XXXXX"
+  },
+  "footer": {
+    "quote": "“Fifteen years, one heart — thank you for being part of our story.”",
+    "signature": "Rixon & Feno"
+  },
+  "audio": {
+    "src": "Isaikaruvi _ இசைக்கருவி - Solomon Jakkim (Official Music Video).mp3",
+    "label": "Anniversary Theme"
+  }
+}

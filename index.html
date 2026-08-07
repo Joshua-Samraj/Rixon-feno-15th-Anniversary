@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Fifteen Years — Rixon &amp; Feno</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#FAF6EF;
+    --ivory-deep:#F1E9DA;
+    --maroon:#5E0E1A;
+    --maroon-deep:#3E0810;
+    --gold:#B8935A;
+    --gold-bright:#D9B876;
+    --ink:#241012;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Cormorant Garamond', serif;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold); color:var(--ivory);}
+
+  /* Prevent scrolling while popup is open */
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  /* ---------- ENTRY POPUP ---------- */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--ivory);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease, visibility 1s ease;
+  }
+  .popup-content {
+    text-align: center;
+    padding: 2rem;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .popup-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-style: italic;
+    color: var(--maroon-deep);
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+  }
+  .popup-btn {
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 16px 40px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--maroon);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+  }
+  .popup-btn:hover {
+    background: var(--maroon);
+    color: var(--ivory);
+    border-color: var(--maroon);
+  }
+
+  .eyebrow{
+    font-family:'Jost', sans-serif;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--maroon);
+    font-weight:400;
+  }
+  .display{
+    font-family:'Cinzel', serif;
+    color:var(--maroon);
+  }
+
+  .rule{
+    width:64px;height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin:22px auto;
+  }
+  .diamond{
+    width:8px;height:8px;
+    background:var(--gold);
+    transform:rotate(45deg);
+    margin:0 auto;
+  }
+
+  .hero-sequence {
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero{
+    position:sticky;
+    top:0;
+    z-index:1;
+    min-height:100vh;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:6vh 6vw;
+    background:
+      radial-gradient(ellipse at top, rgba(184,147,90,0.08), transparent 60%),
+      var(--ivory);
+    border-bottom:1px solid rgba(94,14,26,0.12);
+  }
+  .hero::before, .hero::after{
+    content:'';
+    position:absolute;
+    left:50%; transform:translateX(-50%);
+    width:min(86vw, 640px);
+    border:1px solid var(--gold);
+    opacity:0.45;
+  }
+  .hero::before{ top:5vh; height:calc(90svh - 10vh); border-bottom:none;
+    clip-path: polygon(0 0, 100% 0, 100% 6%, 0 6%, 0 94%, 100% 94%, 100% 100%, 0 100%);
+  }
+  .hero-mono{
+    font-family:'Cinzel', serif;
+    font-size:clamp(0.8rem, 2vw, 1rem);
+    letter-spacing:0.5em;
+    color:var(--gold);
+    margin-bottom:18px;
+  }
+  .hero-num{
+    font-family:'Cinzel', serif;
+    font-size:clamp(4.5rem, 16vw, 9.5rem);
+    line-height:0.85;
+    color:var(--maroon);
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  .hero-num sup{
+    font-size:0.28em;
+    top:-2.2em;
+    color:var(--gold);
+    letter-spacing:0.1em;
+  }
+  .hero-sub{
+    font-family:'Jost', sans-serif;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    font-size:0.78rem;
+    color:var(--ink);
+    opacity:0.75;
+    margin-top:6px;
+  }
+  .hero-names{
+    font-size:clamp(2.1rem, 5.5vw, 3.6rem);
+    font-style:italic;
+    font-weight:500;
+    color:var(--ink);
+    margin-top:34px;
+    letter-spacing:0.01em;
+  }
+  .hero-names .amp{
+    color:var(--gold);
+    font-family:'Cinzel', serif;
+    font-style:normal;
+    margin:0 0.28em;
+  }
+  .hero-tag{
+    max-width:460px;
+    margin-top:26px;
+    font-size:1.05rem;
+    line-height:1.7;
+    color:var(--ink);
+    opacity:0.82;
+  }
+  .scroll-cue{
+    position:absolute;
+    bottom:5vh; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    font-family:'Jost', sans-serif;
+    font-size:0.68rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--maroon);
+    opacity:0.7;
+  }
+  .scroll-cue .line{
+    width:1px; height:34px;
+    background:var(--maroon);
+    position:relative;
+    overflow:hidden;
+  }
+  .scroll-cue .line::after{
+    content:'';
+    position:absolute; top:-100%; left:0;
+    width:100%; height:100%;
+    background:var(--gold);
+    animation:cue 1.8s ease-in-out infinite;
+  }
+  @keyframes cue{ to{ top:100%; } }
+
+  /* ---------- BLANKET TRANSITION ---------- */
+  .blanket-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 10%;
+    height: 30vh;
+    overflow: visible;
+    pointer-events: none;
+  }
+  
+  @keyframes flutterWind {
+    0% { transform: rotate(-45deg) scale(1) skewX(0deg); }
+    50% { transform: rotate(-43deg) scale(1.05) skewX(2deg); }
+    100% { transform: rotate(-45deg) scale(1) skewX(0deg); }
+  }
+
+  .blanket-svg {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    width: 150vw; 
+    height: 150vh;
+    margin-left: -125vw;
+    margin-top: -125vh;
+    display: block;
+    transform-origin: center;
+    animation: flutterWind 3.5s ease-in-out infinite;
+    filter: drop-shadow(0px 25px 45px rgba(20, 2, 5, 0.9));
+  }
+
+  /* ---------- RING SECTION ---------- */
+  .ring-section{
+    position:relative;
+    z-index: 5;
+    height:420vh;
+    background:linear-gradient(180deg, var(--ivory) 0%, var(--ivory-deep) 100%);
+  }
+  .ring-pin{
+    position:sticky;
+    top:0;
+    height:100vh;
+    height:100svh;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  #ring-canvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+  .ring-caption{
+    position:absolute;
+    top:12vh;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:3;
+    text-align:center;
+    pointer-events:none;
+    width:100%;
+    max-width:520px;
+    padding:0 6vw;
+  }
+  .ring-caption .year{
+    font-family:'Cinzel', serif;
+    font-size:clamp(1.3rem, 3vw, 1.8rem);
+    color:var(--gold);
+    letter-spacing:0.15em;
+    margin-bottom:10px;
+    opacity:0;
+  }
+  .ring-caption .moment{
+    font-size:clamp(1.4rem, 3.4vw, 2.1rem);
+    font-style:italic;
+    color:var(--maroon-deep);
+    opacity:0;
+    line-height:1.4;
+  }
+  .ring-progress-label{
+    position:absolute;
+    top:6vh; left:50%; transform:translateX(-50%);
+    font-family:'Jost', sans-serif;
+    font-size:0.68rem;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--maroon);
+    opacity:0.6;
+    z-index:3;
+  }
+
+  .details{
+    position:relative;
+    padding:14vh 6vw 16vh;
+    background:var(--maroon);
+    color:var(--ivory);
+    text-align:center;
+    overflow:hidden;
+  }
+  .details::before{
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(217,184,118,0.10), transparent 45%),
+      radial-gradient(circle at 80% 85%, rgba(217,184,118,0.08), transparent 40%);
+    pointer-events:none;
+  }
+  .details-inner{ position:relative; z-index:2; max-width:640px; margin:0 auto; }
+  .details .eyebrow{ color:var(--gold-bright); }
+  .details h2{
+    font-family:'Cinzel', serif;
+    font-size:clamp(2rem, 5vw, 3rem);
+    margin:16px 0 8px;
+    color:var(--ivory);
+  }
+  .details .rule{ background:linear-gradient(90deg, transparent, var(--gold-bright), transparent); }
+  
+  .invite-image {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    border-radius: 24px;
+    border: 2px solid var(--gold-bright);
+    box-shadow: 0 12px 32px rgba(20, 2, 5, 0.4);
+    margin: 10px auto 32px;
+    display: block;
+  }
+
+  .invite-line{
+    font-size:1.2rem;
+    line-height:1.9;
+    opacity:0.92;
+    margin:0 0 40px;
+  }
+  .invite-line em{ color:var(--gold-bright); font-style:italic; }
+
+  .detail-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    text-align:left;
+    border-top:1px solid rgba(217,184,118,0.3);
+    border-bottom:1px solid rgba(217,184,118,0.3);
+    padding:34px 0;
+  }
+  @media (max-width:560px){ .detail-grid{ grid-template-columns:1fr; } }
+  .detail-item .label{
+    font-family:'Jost', sans-serif;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    font-size:0.66rem;
+    color:var(--gold-bright);
+    margin-bottom:8px;
+  }
+  .detail-item .value{
+    font-size:1.28rem;
+    line-height:1.5;
+  }
+  .rsvp-note{
+    margin-top:36px;
+    font-size:0.95rem;
+    opacity:0.75;
+    font-family:'Jost', sans-serif;
+    letter-spacing:0.05em;
+  }
+
+  footer{
+    padding:10vh 6vw 8vh;
+    text-align:center;
+    background:var(--ivory);
+  }
+  footer .quote{
+    font-size:clamp(1.1rem, 2.4vw, 1.5rem);
+    font-style:italic;
+    color:var(--maroon-deep);
+    max-width:520px;
+    margin:0 auto 18px;
+    line-height:1.7;
+  }
+  footer .signature{
+    font-family:'Cinzel', serif;
+    font-size:0.85rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  .music-panel{
+    position:fixed;
+    bottom:22px; right:22px;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    gap:0;
+    background:var(--ivory);
+    border:1px solid var(--gold);
+    border-radius:999px;
+    padding:6px;
+    box-shadow:0 8px 24px rgba(62,8,16,0.18);
+    font-family:'Jost', sans-serif;
+  }
+  .music-btn{
+    width:40px; height:40px;
+    border-radius:50%;
+    border:none;
+    background:var(--maroon);
+    color:var(--ivory);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    flex-shrink:0;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .music-btn:hover{ background:var(--maroon-deep); transform:scale(1.05); }
+  .music-btn svg{ width:16px; height:16px; }
+  .music-label{
+    max-width:0;
+    overflow:hidden;
+    white-space:nowrap;
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    color:var(--maroon);
+    transition:max-width .35s ease, padding .35s ease;
+  }
+  .music-panel.has-track .music-label{
+    max-width:160px;
+    padding:0 10px 0 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .scroll-cue .line::after{ animation:none; }
+    .blanket-svg { animation: none; transform: rotate(-45deg); }
+  }
+
+  @media (max-width: 768px){
+    .hero{ padding:8vh 7vw; }
+    .hero::before{ top:4vh; height:calc(92svh - 8vh); }
+    .hero-mono{ letter-spacing:0.3em; }
+    .hero-tag{ font-size:0.98rem; max-width:340px; }
+
+    .blanket-wrapper { height: 130vh; }
+
+    .ring-section{ height:280vh; }
+    .ring-progress-label{ top:4.5vh; font-size:0.6rem; letter-spacing:0.25em; }
+    .ring-caption{ max-width:88vw; padding:0 5vw; }
+
+    .details{ padding:11vh 7vw 12vh; }
+    .invite-image { max-width: 280px; }
+    .invite-line{ font-size:1.08rem; margin:0 0 32px; }
+    .detail-grid{ gap:22px; padding:26px 0; }
+    .detail-item .value{ font-size:1.15rem; }
+
+    footer{ padding:8vh 7vw 10vh; }
+  }
+
+  @media (max-width: 480px){
+    .hero-num{ font-size:clamp(3.6rem, 20vw, 6.5rem); }
+    .hero-names{ font-size:clamp(1.7rem, 8vw, 2.4rem); }
+    .hero-mono{ font-size:0.62rem; letter-spacing:0.22em; }
+    .hero-sub{ font-size:0.65rem; letter-spacing:0.22em; }
+
+    .ring-section{ height:240vh; }
+    .ring-caption .moment{ font-size:1.3rem; }
+
+    .detail-grid{ grid-template-columns:1fr; }
+    .details h2{ font-size:1.9rem; }
+  }
+
+  @media (hover: none) and (pointer: coarse){
+    .music-btn{ width:46px; height:46px; }
+  }
+  .music-panel{
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    right: calc(16px + env(safe-area-inset-right));
+  }
+  @media (max-width: 480px){
+    .music-panel.has-track .music-label{ max-width:34vw; }
+  }
+</style>
+</head>
+<body class="no-scroll"> <!-- Add no-scroll class by default -->
+
+<!-- START POPUP OVERLAY -->
+<div class="popup-overlay" id="welcome-popup">
+  <div class="popup-content">
+    <p class="popup-quote">“A successful marriage requires falling in love many times, always with the same person.”</p>
+    <button class="popup-btn" id="enter-btn">Enter Journey</button>
+  </div>
+</div>
+<!-- END POPUP OVERLAY -->
+
+<div class="hero-sequence">
+  <section class="hero" id="hero">
+    <div class="hero-mono">R &amp; F — Crystal anniversary </div>
+    <div class="hero-num">15<sup>TH</sup></div>
+    <div class="hero-sub">Wedding Anniversary</div>
+    <div class="hero-names">Rixon <span class="amp">&amp;</span> Feno</div>
+    <div class="rule"></div>
+    <p class="hero-tag">Two lives, one journey — join us as we celebrate fifteen years of love, laughter, and everything in between.</p>
+    <div class="scroll-cue">
+      <span>Scroll to begin</span>
+      <span class="line"></span>
+    </div>
+  </section>
+
+  <!-- 45-degree tilted billowing blanket -->
+  <div class="blanket-wrapper" id="blanket-wrapper">
+    <!-- <svg class="blanket-svg" viewBox="0 0 100 100" preserveAspectRatio="none"> -->
+      <defs>
+        <linearGradient id="fabric-grad" x1="10%" y1="0%" x2="90%" y2="100%">
+          <stop offset="0%" stop-color="#2a0409"/>
+          <stop offset="20%" stop-color="#5E0E1A"/>
+          <stop offset="40%" stop-color="#8a1c2e"/>
+          <stop offset="55%" stop-color="#3E0810"/>
+          <stop offset="75%" stop-color="#8a1c2e"/>
+          <stop offset="90%" stop-color="#5E0E1A"/>
+          <stop offset="100%" stop-color="#2a0409"/>
+        </linearGradient>
+      </defs>
+      <path id="cloth-path" fill="url(#fabric-grad)" d="M -20,20 C 20,-10 80,50 120,20 L 120,80 C 80,110 20,50 -20,80 Z" />
+    </svg>
+  </div>
+</div>
+
+<section class="ring-section" id="ring-section">
+  <div class="ring-pin">
+    <div class="ring-progress-label" id="ring-progress-label">Our Story · 2011 — 2026</div>
+    <canvas id="ring-canvas"></canvas>
+    <div class="ring-caption" id="ring-caption">
+      <div class="year">2011</div>
+      <div class="moment">Where it all began</div>
+    </div>
+  </div>
+</section>
+
+<section class="details" id="details">
+  <div class="details-inner">
+    <div class="eyebrow">You Are Cordially Invited</div>
+    <h2>Celebrate With Us</h2>
+    <div class="rule"></div>
+    
+    <img src="images/invitation_1.png" alt="15th Anniversary Invitation" class="invite-image">
+
+    <p class="invite-line">Fifteen years ago we said <em>“I do.”</em> Now, surrounded by the people who mean the most to us, we'd love for you to raise a glass to the years behind us — and the ones still to come.</p>
+
+    <div class="detail-grid">
+      <div class="detail-item">
+        <div class="label">Date</div>
+        <div class="value">Saturday, 14th February 2026</div>
+      </div>
+      <div class="detail-item">
+        <div class="label">Time</div>
+        <div class="value">6:30 PM onwards</div>
+      </div>
+      <div class="detail-item">
+        <div class="label">Venue</div>
+        <div class="value">Devi mini hall,Tirunelveli</div>
+      </div>
+      <!-- <div class="detail-item">
+        <div class="label">Dress Code</div>
+        <div class="value">Evening Formal — Maroon &amp; Gold</div>
+      </div> -->
+    </div>
+
+    <p class="rsvp-note">Kindly RSVP by 1st February 2026 · +91 98XXX XXXXX</p>
+  </div>
+</section>
+
+<footer>
+  <p class="quote">“Fifteen years, one heart — thank you for being part of our story.”</p>
+  <div class="diamond"></div>
+  <div class="rule"></div>
+  <div class="signature">Rixon &amp; Feno</div>
+</footer>
+
+<div class="music-panel has-track" id="music-panel">
+  <button class="music-btn" id="play-toggle" aria-label="Play background music">
+    <svg id="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    <svg id="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+  </button>
+  <span class="music-label" id="music-label">Anniversary Theme</span>
+</div>
+<audio id="bg-audio" loop src="Isaikaruvi _ இசைக்கருவி - Solomon Jakkim (Official Music Video).mp3"></audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const audio = document.getElementById('bg-audio');
+const playToggle = document.getElementById('play-toggle');
+const playIcon = document.getElementById('play-icon');
+const pauseIcon = document.getElementById('pause-icon');
+audio.volume = 0.55;
+
+// ---------- POPUP & MUSIC LOGIC ----------
+const popupOverlay = document.getElementById('welcome-popup');
+const enterBtn = document.getElementById('enter-btn');
+let musicStarted = false;
+
+enterBtn.addEventListener('click', () => {
+  // Hide popup & restore scrolling
+  popupOverlay.style.opacity = '0';
+  setTimeout(() => {
+    popupOverlay.style.visibility = 'hidden';
+    document.body.classList.remove('no-scroll');
+    
+    // Refresh ScrollTrigger after unlocking the body to ensure correct calculations
+    ScrollTrigger.refresh();
+  }, 1000); // 1s matches the CSS transition
+
+  // Play audio
+  if (!musicStarted && audio.paused) {
+    audio.play().then(() => {
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+      musicStarted = true;
+    }).catch(err => console.log("Autoplay prevented:", err));
+  }
+});
+
+// Specific listener for the floating play/pause button
+playToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  musicStarted = true; 
+  
+  if (audio.paused){
+    audio.play();
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
+  } else {
+    audio.pause();
+    playIcon.style.display = 'block';
+    pauseIcon.style.display = 'none';
+  }
+});
+
+
+// ---------- PAGE ANIMATIONS ----------
+
+// Hero Entrance
+gsap.from(".hero-mono", { opacity:0, y:-14, duration:1, delay:0.2, ease:"power2.out" });
+gsap.from(".hero-num", { opacity:0, y:24, duration:1.1, delay:0.35, ease:"power3.out" });
+gsap.from(".hero-sub", { opacity:0, duration:1, delay:0.65 });
+gsap.from(".hero-names", { opacity:0, y:16, duration:1, delay:0.8, ease:"power2.out" });
+gsap.from(".hero-tag", { opacity:0, y:10, duration:1, delay:1.05 });
+gsap.from(".scroll-cue", { opacity:0, duration:1, delay:1.3 });
+
+// Smoothly fade the hero out as the blanket scrolls over it
+gsap.to(".hero", {
+  opacity: 0,
+  scrollTrigger: { 
+    trigger: "#blanket-wrapper", 
+    start: "top center", 
+    end: "center center", 
+    scrub: true 
+  }
+});
+
+// Continuous morphing wind animation on the SVG path
+if (!prefersReduced) {
+  gsap.to("#cloth-path", {
+    attr: {
+      d: "M -20,20 C 20,50 80,-10 120,20 L 120,80 C 80,50 20,110 -20,80 Z"
+    },
+    duration: 1.8,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+}
+
+const MILESTONES = [
+  { year: "2011", moment: "Where it all began", imageSrc: "https://picsum.photos/id/1015/512/691" },
+  { year: "2013", moment: "Our first home together", imageSrc: "https://picsum.photos/id/1016/512/691" },
+  { year: "2015", moment: "Laughter through every season", imageSrc: "https://picsum.photos/id/1018/512/691" },
+  { year: "2017", moment: "A family grows", imageSrc: "https://picsum.photos/id/1019/512/691" },
+  { year: "2019", moment: "Adventures, near and far", imageSrc: "https://picsum.photos/id/1020/512/691" },
+  { year: "2021", moment: "Steady through the storms", imageSrc: "https://picsum.photos/id/1021/512/691" },
+  { year: "2023", moment: "Still choosing each other", imageSrc: "https://picsum.photos/id/1022/512/691" },
+  { year: "2026", moment: "Fifteen years, one heart", imageSrc: "https://picsum.photos/id/1023/512/691" }
+];
+
+function makeCardTexture({ imageSrc, year }) {
+  const size = 512;
+  const c = document.createElement('canvas');
+  c.width = size;
+  c.height = Math.round(size * 1.35);
+  const ctx = c.getContext('2d');
+
+  const tex = new THREE.CanvasTexture(c);
+  tex.anisotropy = 4;
+
+  ctx.fillStyle = '#3e0810';
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  const img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.src = imageSrc;
+
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+
+    const grad = ctx.createLinearGradient(0, c.height * 0.5, 0, c.height);
+    grad.addColorStop(0, 'rgba(62, 8, 16, 0)');
+    grad.addColorStop(1, 'rgba(62, 8, 16, 0.95)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, c.width, c.height);
+
+    ctx.strokeStyle = '#d9b876';
+    ctx.lineWidth = 6;
+    ctx.strokeRect(22, 22, c.width - 44, c.height - 44);
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(34, 34, c.width - 68, c.height - 68);
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = '400 34px Cinzel, serif';
+    ctx.fillStyle = '#d9b876';
+    ctx.fillText(year, c.width / 2, c.height * 0.88);
+
+    tex.needsUpdate = true;
+  };
+
+  return tex;
+}
+
+const canvas = document.getElementById('ring-canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(42, window.innerWidth/window.innerHeight, 0.1, 100);
+camera.position.set(0, 0.4, 7.2);
+
+function sizeRenderer(){
+  const w = window.innerWidth, h = window.innerHeight;
+  renderer.setSize(w, h);
+  camera.aspect = w/h;
+
+  const isNarrow = camera.aspect < 0.75;
+  camera.fov = isNarrow ? 58 : 42;
+  camera.position.z = isNarrow ? 9.2 : 7.2;
+
+  camera.updateProjectionMatrix();
+  if (typeof renderScene === 'function') renderScene();
+}
+sizeRenderer();
+window.addEventListener('resize', sizeRenderer);
+window.addEventListener('orientationchange', () => setTimeout(sizeRenderer, 250));
+
+const ambient = new THREE.AmbientLight(0xffe9c7, 0.55);
+scene.add(ambient);
+
+const goldPoint = new THREE.PointLight(0xd9b876, 1.6, 20, 2);
+goldPoint.position.set(4, 3, 5);
+scene.add(goldPoint);
+
+const maroonPoint = new THREE.PointLight(0x8a1c2e, 1.1, 20, 2);
+maroonPoint.position.set(-4, -2, 4);
+scene.add(maroonPoint);
+
+const ringGroup = new THREE.Group();
+scene.add(ringGroup);
+
+const RADIUS = 3.3;
+const CARD_W = 1.55, CARD_H = 2.1;
+MILESTONES.forEach((m, i) => {
+  const angle = (i / MILESTONES.length) * Math.PI * 2;
+  const tex = makeCardTexture(m);
+  const mat = new THREE.MeshStandardMaterial({ map: tex, roughness:0.4, metalness:0.15, side:THREE.DoubleSide });
+  const geo = new THREE.PlaneGeometry(CARD_W, CARD_H);
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(Math.sin(angle)*RADIUS, 0, Math.cos(angle)*RADIUS);
+  mesh.rotation.y = angle;
+  ringGroup.add(mesh);
+});
+
+const particleCount = prefersReduced ? 0 : 70;
+if (particleCount){
+  const pGeo = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount*3);
+  for (let i=0;i<particleCount;i++){
+    positions[i*3] = (Math.random()-0.5)*10;
+    positions[i*3+1] = (Math.random()-0.5)*6;
+    positions[i*3+2] = (Math.random()-0.5)*10;
+  }
+  pGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  const pMat = new THREE.PointsMaterial({ color:0xd9b876, size:0.02, transparent:true, opacity:0.55 });
+  const points = new THREE.Points(pGeo, pMat);
+  scene.add(points);
+
+  gsap.to(points.rotation, { y: Math.PI*2, duration:120, repeat:-1, ease:"none" });
+}
+
+function renderScene(){ renderer.render(scene, camera); }
+renderScene();
+
+const captionEl = document.getElementById('ring-caption');
+const yearEl = captionEl.querySelector('.year');
+const momentEl = captionEl.querySelector('.moment');
+let activeIndex = -1;
+
+function updateCaption(progress){
+  const idx = Math.round(progress * (MILESTONES.length - 1));
+  
+  if (idx !== activeIndex){
+    activeIndex = idx;
+    const m = MILESTONES[idx];
+    gsap.timeline()
+      .to([yearEl, momentEl], { opacity:0, y:-8, duration:0.25, ease:"power1.in" })
+      .call(() => { yearEl.textContent = m.year; momentEl.textContent = m.moment; })
+      .to([yearEl, momentEl], { opacity:1, y:0, duration:0.5, ease:"power2.out" });
+  }
+}
+
+ScrollTrigger.create({
+  trigger: "#ring-section",
+  start: "top top",
+  end: "bottom bottom",
+  scrub: 0.6,
+  onUpdate: (self) => {
+    const progress = self.progress;
+    
+    const angleStep = Math.PI * 2 / MILESTONES.length;
+    const maxRotation = (MILESTONES.length - 1) * angleStep;
+    
+    ringGroup.rotation.y = -progress * maxRotation;
+    
+    camera.position.x = Math.sin(progress*Math.PI*2*0.15) * 0.4;
+    goldPoint.intensity = 1.2 + Math.sin(progress*Math.PI*4)*0.4;
+    
+    updateCaption(progress);
+    renderScene();
+  }
+});
+
+updateCaption(0);
+
+if (!prefersReduced){
+  gsap.to(ringGroup.position, { y: 0.08, duration:2.6, ease:"sine.inOut", yoyo:true, repeat:-1, onUpdate:renderScene });
+}
+
+gsap.from(".details .eyebrow, .details h2, .details .rule, .invite-image", {
+  opacity:0, y:20, duration:0.9, stagger:0.08, ease:"power2.out",
+  scrollTrigger:{ trigger:".details", start:"top 75%" }
+});
+gsap.from(".invite-line", {
+  opacity:0, y:16, duration:1,
+  scrollTrigger:{ trigger:".invite-line", start:"top 80%" }
+});
+gsap.from(".detail-item", {
+  opacity:0, y:18, duration:0.8, stagger:0.1, ease:"power2.out",
+  scrollTrigger:{ trigger:".detail-grid", start:"top 82%" }
+});
+gsap.from(".rsvp-note", {
+  opacity:0, duration:1,
+  scrollTrigger:{ trigger:".rsvp-note", start:"top 90%" }
+});
+gsap.from("footer .quote, footer .diamond, footer .rule, footer .signature", {
+  opacity:0, y:14, duration:0.9, stagger:0.08,
+  scrollTrigger:{ trigger:"footer", start:"top 85%" }
+});
+</script>
+</body>
+</html>
