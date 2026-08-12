@@ -106,20 +106,57 @@
     margin-bottom:18px;
     font-weight: 600;
   }
-  .hero-num{
-    font-family:'Cinzel', serif;
-    font-size:clamp(4.5rem, 16vw, 9.5rem);
-    line-height:0.85;
-    color:var(--maroon);
+  
+  .hero-num {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+    z-index: 10;
+  }
+  
+  .num-text {
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(5.5rem, 18vw, 11rem);
+    line-height:1.1;
+    padding-bottom: 0.1em;
     font-weight:700;
     letter-spacing:0.02em;
+    background: linear-gradient(135deg, var(--maroon-deep) 35%, var(--gold-bright) 50%, var(--maroon-deep) 65%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: wipeShine 4s linear infinite;
+    display: block;
+    position: relative;
+    z-index: 2;
   }
-  .hero-num sup{
+  
+  .num-glitter {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--gold-bright);
+    box-shadow: 0 0 6px var(--gold-bright), 0 0 10px var(--gold);
+    pointer-events: none;
+    z-index: 3;
+    animation: windGlitter linear forwards;
+  }
+
+  @keyframes windGlitter {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.2); }
+    20% { opacity: 1; transform: translate(calc(var(--wind-x) * 0.2), calc(var(--wind-y) * 0.2)) scale(1); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: translate(var(--wind-x), var(--wind-y)) scale(0.2); }
+  }
+
+  .num-text sup{
     font-size:0.28em;
     top:-2.2em;
     color:var(--gold);
     letter-spacing:0.1em;
   }
+  
   .hero-sub{
     font-family:'Jost', sans-serif;
     letter-spacing:0.3em;
@@ -230,7 +267,6 @@
     cursor:pointer;
     transition:all 0.3s ease;
     border-radius:6px;
-    /* margin:auto ; */
     display:inline-block;
     position:relative;
     z-index:1;
@@ -558,7 +594,8 @@
       justify-content: flex-start;
       padding-top: 6vh;
     }
-    .hero-num{ font-size:7.6rem }
+    
+    .num-text{ font-size:8.6rem; }
     .hero-mono{ font-size:0.85rem; letter-spacing:0.22em; }
     .hero-sub{ font-size:0.68rem; letter-spacing:0.22em; }
     .hero-names{font-size: 3rem;}
@@ -584,7 +621,11 @@
 <div class="hero-sequence">
   <section class="hero" id="hero">
     <div class="hero-mono">R &amp; F — A Crystal Celebration</div>
-    <div class="hero-num">15</div>
+    
+    <div class="hero-num" id="hero-num-container">
+      <span class="num-text">15</span>
+    </div>
+    
     <div class="hero-sub">Year of Enduring Love</div>
     <div class="hero-names">Rixon <span class="amp">&amp;</span> Feno</div>
     <p class="hero-tag">A milestone of devotion, trust, and crystal-clear love. Join us to honor fifteen beautiful years and the countless memories yet to be made.</p>
@@ -619,10 +660,6 @@
       </div>
     </div>
 
-    
-
-    
-
   </div>
 </section>
 
@@ -646,7 +683,6 @@
     <svg id="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
     <svg id="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
   </button>
-  <!-- <span class="music-label" id="music-label"></span> -->
 </div>
 <audio id="bg-audio" loop playsinline preload="auto" src="[trimmed] Perfect.mp3"></audio>
 
@@ -697,6 +733,46 @@ playToggle.addEventListener('click', (e) => {
     pauseIcon.style.display = 'none';
   }
 });
+
+// Wind Glitter Effect for the number 15
+function spawnNumberParticle() {
+  const container = document.getElementById('hero-num-container');
+  if (!container) return;
+
+  const p = document.createElement('div');
+  p.className = 'num-glitter';
+
+  // Random starting position roughly within the bounds of the text
+  p.style.left = (Math.random() * 80 + 10) + '%';
+  p.style.top = (Math.random() * 70 + 15) + '%';
+
+  // Wind direction: Flowing from bottom-left to top-right
+  // Positive X (right) and Negative Y (up)
+  const windX = (Math.random() * 60 + 80) + 'px';   
+  const windY = -(Math.random() * 80 + 100) + 'px'; 
+
+  p.style.setProperty('--wind-x', windX);
+  p.style.setProperty('--wind-y', windY);
+
+  // Random size
+  const size = Math.random() * 3 + 2; 
+  p.style.width = size + 'px';
+  p.style.height = size + 'px';
+
+  // Random duration
+  const duration = Math.random() * 2 + 1.5; 
+  p.style.animationDuration = duration + 's';
+
+  container.appendChild(p);
+
+  setTimeout(() => {
+    if (p.parentNode) p.remove();
+  }, duration * 1000);
+}
+
+// Generate glitter particles continuously
+setInterval(spawnNumberParticle, 250);
+
 
 const inviteModal = document.getElementById('invite-modal');
 const viewInviteBtn = document.getElementById('view-invite-btn');
