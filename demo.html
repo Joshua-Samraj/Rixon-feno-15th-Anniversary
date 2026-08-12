@@ -3,6 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Join us in celebrating the 15th Wedding Anniversary of Rixon &amp; Feno on Saturday, 15th August 2026 at Devi mini hall, Tirunelveli.">
+<meta name="keywords" content="Rixon and Feno, 15th Anniversary, Crystal Celebration, Wedding Anniversary Invitation, Devi mini hall Tirunelveli">
+<meta name="author" content="Diginest">
+<meta name="theme-color" content="#5E0E1A">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fifteen Years — Rixon &amp; Feno | 15th Anniversary Celebration">
+<meta property="og:description" content="A milestone of devotion, trust, and crystal-clear love. Join us to honor fifteen beautiful years on August 15th, 2026 at Devi mini hall, Tirunelveli.">
+<meta property="og:image" content="https://rixon-feno-15th-anniversary.vercel.app/images/Rixon_feno_4_c.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fifteen Years — Rixon &amp; Feno | 15th Anniversary Celebration">
+<meta name="twitter:description" content="A milestone of devotion, trust, and crystal-clear love. Join us to honor fifteen beautiful years on August 15th, 2026 at Devi mini hall, Tirunelveli.">
+<meta name="twitter:image" content="https://rixon-feno-15th-anniversary.vercel.app/images/Rixon_feno_4_c.png">
 <title>Fifteen Years — Rixon &amp; Feno</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,52 +44,6 @@
 
   body.no-scroll {
     overflow: hidden;
-  }
-
-  .popup-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--ivory);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 1s ease, visibility 1s ease;
-  }
-  .popup-content {
-    text-align: center;
-    padding: 2rem;
-    max-width: 720px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .popup-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-style: italic;
-    color: var(--maroon-deep);
-    margin-bottom: 2.5rem;
-    line-height: 1.5;
-  }
-  .popup-btn {
-    font-family: 'Jost', sans-serif;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    font-weight: 500;
-    padding: 16px 40px;
-    border: 2px solid var(--gold);
-    background: transparent;
-    color: var(--maroon);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-  }
-  .popup-btn:hover {
-    background: var(--maroon);
-    color: var(--ivory);
-    border-color: var(--maroon);
   }
 
   .eyebrow{
@@ -111,17 +79,13 @@
   .hero{
     position:relative;
     z-index:1;
-    min-height:100vh;
-    min-height:100svh;
+    min-height:auto;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:6vh 6vw;
-    background:
-      radial-gradient(ellipse at top, rgba(184,147,90,0.08), transparent 60%),
-      var(--ivory);
+    padding:8vh 6vw 4vh;
     border-bottom:1px solid rgba(94,14,26,0.12);
   }
   .hero::before, .hero::after{
@@ -129,10 +93,9 @@
     position:absolute;
     left:50%; transform:translateX(-50%);
     width:min(86vw, 640px);
-    border:1px solid var(--gold);
     opacity:0.45;
   }
-  .hero::before{ top:5vh; height:calc(90svh - 10vh); border-bottom:none;
+  .hero::before{ top:5vh; height:calc(100% - 10vh); border-bottom:none;
     clip-path: polygon(0 0, 100% 0, 100% 6%, 0 6%, 0 94%, 100% 94%, 100% 100%, 0 100%);
   }
   .hero-mono{
@@ -143,27 +106,63 @@
     margin-bottom:18px;
     font-weight: 600;
   }
-  .hero-num{
-    font-family:'Cinzel', serif;
-    font-size:clamp(4.5rem, 16vw, 9.5rem);
-    line-height:0.85;
-    color:var(--maroon);
+  
+  .hero-num {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+    z-index: 10;
+  }
+  
+  .num-text {
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(5.5rem, 18vw, 11rem);
+    line-height:1.1;
+    padding-bottom: 0.1em;
     font-weight:700;
     letter-spacing:0.02em;
+    background: linear-gradient(135deg, var(--maroon-deep) 35%, var(--gold-bright) 50%, var(--maroon-deep) 65%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: wipeShine 4s linear infinite;
+    display: block;
+    position: relative;
+    z-index: 2;
   }
-  .hero-num sup{
+  
+  .num-glitter {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--gold-bright);
+    box-shadow: 0 0 6px var(--gold-bright), 0 0 10px var(--gold);
+    pointer-events: none;
+    z-index: 3;
+    animation: windGlitter linear forwards;
+  }
+
+  @keyframes windGlitter {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.2); }
+    20% { opacity: 1; transform: translate(calc(var(--wind-x) * 0.2), calc(var(--wind-y) * 0.2)) scale(1); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: translate(var(--wind-x), var(--wind-y)) scale(0.2); }
+  }
+
+  .num-text sup{
     font-size:0.28em;
     top:-2.2em;
     color:var(--gold);
     letter-spacing:0.1em;
   }
+  
   .hero-sub{
     font-family:'Jost', sans-serif;
     letter-spacing:0.3em;
     text-transform:uppercase;
     font-size:0.78rem;
     color:var(--ink);
-    opacity:0.85;
     margin-top:6px;
     font-weight: 500;
   }
@@ -171,23 +170,36 @@
     font-size:clamp(2.1rem, 5.5vw, 3.6rem);
     font-style:italic;
     font-weight:600;
-    color:var(--ink);
+    color:var(--maroon-deep);
     margin-top:34px;
     letter-spacing:0.01em;
+    background: linear-gradient(135deg, var(--maroon-deep) 35%, var(--gold-bright) 50%, var(--maroon-deep) 65%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: wipeShine 4s linear infinite;
   }
+  
+  @keyframes wipeShine {
+    0% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+  }
+
   .hero-names .amp{
     color:var(--gold);
     font-family:'Cinzel', serif;
     font-style:normal;
     margin:0 0.28em;
+    -webkit-text-fill-color: transparent;
   }
   .hero-tag{
-    max-width:460px;
+    max-width:520px;
     margin-top:26px;
+    margin-bottom:0;
     font-size:1.15rem;
     line-height:1.7;
     color:var(--ink);
-    opacity:0.9;
     font-weight: 500;
   }
   .scroll-cue{
@@ -199,7 +211,6 @@
     letter-spacing:0.3em;
     text-transform:uppercase;
     color:var(--maroon);
-    opacity:0.8;
     font-weight: 500;
   }
   .scroll-cue .line{
@@ -219,7 +230,7 @@
 
   .details{
     position:relative;
-    padding:14vh 6vw 16vh;
+    padding:6vh 6vw 16vh;
     background:var(--maroon);
     color:var(--ivory);
     text-align:center;
@@ -249,21 +260,54 @@
     letter-spacing:0.2em;
     text-transform:uppercase;
     font-size:0.9rem;
-    font-weight:500;
+    font-weight:600;
     padding:18px 44px;
-    border:2px solid var(--gold-bright);
-    background:transparent;
+    background:var(--maroon);
     color:var(--ivory);
     cursor:pointer;
     transition:all 0.3s ease;
-    border-radius:4px;
-    margin:10px auto 34px;
+    border-radius:6px;
     display:inline-block;
+    position:relative;
+    z-index:1;
+    overflow:hidden;
+    border:none;
+  }
+  .view-invite-btn::before{
+    content:'';
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:350px;
+    height:350px;
+    margin-top:-175px;
+    margin-left:-175px;
+    background:conic-gradient(transparent, var(--gold-bright), var(--gold), transparent 40%);
+    animation:borderRotate 2.5s linear infinite;
+    z-index:-2;
+  }
+  .view-invite-btn::after{
+    content:'';
+    position:absolute;
+    inset:4px;
+    background:var(--maroon);
+    border-radius:3px;
+    z-index:-1;
+    transition:background 0.3s ease;
+  }
+  @keyframes borderRotate {
+    0% {
+      transform:rotate(0deg);
+    }
+    100% {
+      transform:rotate(360deg);
+    }
+  }
+  .view-invite-btn:hover::after{
+    background:var(--gold-bright);
   }
   .view-invite-btn:hover{
-    background:var(--gold-bright);
     color:var(--maroon-deep);
-    border-color:var(--gold-bright);
   }
 
   .invite-modal{
@@ -357,11 +401,30 @@
     color: var(--gold-bright); 
   }
 
+  .map-wrapper {
+    margin: 34px auto 0;
+    width: 100%;
+    max-width: 600px;
+    border: 2px solid var(--gold-bright);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    background: var(--maroon-deep);
+  }
+
+  .map-wrapper iframe {
+    width: 100%;
+    height: 320px;
+    display: block;
+    border: 0;
+  }
+
   .action-buttons {
     display: flex;
     gap: 16px;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 16px;
+    margin-bottom: 40px;
     flex-wrap: wrap;
   }
   .action-btn {
@@ -432,6 +495,7 @@
     padding:6px;
     box-shadow:0 8px 24px rgba(62,8,16,0.18);
     font-family:'Jost', sans-serif;
+    transform: translateZ(0); /* Prevents layout rendering flicker */
   }
   .music-btn{
     width:40px; height:40px;
@@ -443,9 +507,11 @@
     cursor:pointer;
     flex-shrink:0;
     transition:background .2s ease, transform .2s ease;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
   }
   .music-btn:hover{ background:var(--maroon-deep); transform:scale(1.05); }
-  .music-btn svg{ width:16px; height:16px; }
+  .music-btn svg{ width:16px; height:16px; pointer-events: none; } /* Added pointer-events:none to stop child event interference */
   .music-label{
     max-width:0;
     overflow:hidden;
@@ -460,18 +526,58 @@
     padding:0 10px 0 4px;
   }
 
+  .particles-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
+
+  .flash-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 100vh;
+    background: radial-gradient(ellipse at top, rgba(217,184,118,0.7) 0%, transparent 60%);
+    opacity: 0;
+    animation: flashFade 1.4s ease-out forwards;
+    pointer-events: none;
+  }
+
+  @keyframes flashFade {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .particle {
+    position: absolute;
+    top: -50px;
+    opacity: 0;
+    background: var(--gold-bright);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--gold-bright);
+    animation: snowfall linear both;
+  }
+
+  @keyframes snowfall {
+    0% { transform: translate(0, 0) scale(1); opacity: 0; }
+    10% { opacity: 0.9; }
+    85% { opacity: 0.7; }
+    100% { transform: translate(var(--sway), 110vh) scale(0.4); opacity: 0; }
+  }
+
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     .scroll-cue .line::after{ animation:none; }
   }
 
   @media (max-width: 768px){
-    .hero{ padding:8vh 7vw; }
-    .hero::before{ top:4vh; height:calc(92svh - 8vh); }
+    .hero{ padding:6vh 7vw 3vh; }
+    .hero::before{ top:4vh; height:calc(100% - 8vh); }
     .hero-mono{ letter-spacing:0.3em; }
     .hero-tag{ font-size:1.05rem; max-width:340px; }
 
-    .details{ padding:11vh 7vw 12vh; }
+    .details{ padding:5vh 7vw 12vh; }
     .invite-line{ font-size:1.15rem; margin:0 0 32px; }
     .detail-grid{ gap:22px; padding:26px 0; }
     .detail-item .value{ font-size:1.2rem; }
@@ -479,16 +585,25 @@
     .action-btn { width: 100%; text-align: center; }
     .view-invite-btn{ width:100%; }
 
+    .map-wrapper iframe {
+      height: 260px;
+    }
+
     footer{ padding:8vh 7vw 10vh; }
   }
 
   @media (max-width: 480px){
-    .hero-num{ font-size:clamp(3.6rem, 20vw, 6.5rem); }
-    .hero-names{ font-size:clamp(1.7rem, 8vw, 2.4rem); }
-    .hero-mono{ font-size:0.65rem; letter-spacing:0.22em; }
+    .hero {
+      justify-content: flex-start;
+      padding-top: 6vh;
+    }
+    
+    .num-text{ font-size:8.6rem; }
+    .hero-mono{ font-size:0.85rem; letter-spacing:0.22em; }
     .hero-sub{ font-size:0.68rem; letter-spacing:0.22em; }
+    .hero-names{font-size: 3rem;}
 
-    .detail-grid{ grid-template-columns:1fr; }
+    .detail-grid{ grid-template-columns:12fr; }
     .details h2{ font-size:1.9rem; }
   }
 
@@ -504,26 +619,19 @@
   }
 </style>
 </head>
-<body class="no-scroll"> 
-
-<div class="popup-overlay" id="welcome-popup">
-  <div class="popup-content">
-    <p class="popup-quote">“A successful marriage requires falling in love many times, always with the same person.”</p>
-    <button class="popup-btn" id="enter-btn">See invitation</button>
-  </div>
-</div>
+<body> 
 
 <div class="hero-sequence">
   <section class="hero" id="hero">
-    <div class="hero-mono">R &amp; F — Crystal anniversary </div>
-    <div class="hero-num">15<sup>TH</sup></div>
-    <div class="hero-sub">Wedding Anniversary</div>
-    <div class="hero-names">Rixon <span class="amp">&amp;</span> Feno</div>
-    <p class="hero-tag">Two lives, one journey — join us as we celebrate fifteen years of love, laughter, and everything in between.</p>
-    <div class="scroll-cue">
-      <span>Scroll to begin</span>
-      <span class="line"></span>
+    <div class="hero-mono">R &amp; F — A Crystal Celebration</div>
+    
+    <div class="hero-num" id="hero-num-container">
+      <span class="num-text">15</span>
     </div>
+    
+    <div class="hero-sub">Year of Enduring Love</div>
+    <div class="hero-names">Rixon <span class="amp">&amp;</span> Feno</div>
+    <p class="hero-tag">A milestone of devotion, trust, and crystal-clear love. Join us to honor fifteen beautiful years and the countless memories yet to be made.</p>
   </section>
 </div>
 
@@ -533,9 +641,12 @@
     <h2>Celebrate With Us</h2>
     <div class="rule"></div>
 
-    <button class="view-invite-btn" id="view-invite-btn">View Invitation</button>
-
-    <p class="invite-line">Fifteen years ago we said <em>“I do.”</em> Now, surrounded by the people who mean the most to us, we'd love for you to raise a glass to the years behind us — and the ones still to come.</p>
+    
+    <div class="action-buttons">
+      <button class="view-invite-btn" id="view-invite-btn">View Invitation</button>
+      <a href="https://maps.google.com/?q=Devi+mini+hall,Tirunelveli" target="_blank" class="action-btn">View Location</a>
+      <a href="tel:+918148987257" class="action-btn">Call for Details</a>
+    </div>
 
     <div class="detail-grid">
       <div class="detail-item">
@@ -552,18 +663,13 @@
       </div>
     </div>
 
-    <div class="action-buttons">
-      <a href="https://maps.google.com/?q=Devi+mini+hall,Tirunelveli" target="_blank" class="action-btn">View Location</a>
-      <a href="tel:+919500561937" class="action-btn">Call for Details</a>
-    </div>
-
   </div>
 </section>
 
 <div class="invite-modal" id="invite-modal">
   <div class="invite-modal-inner">
     <button class="invite-modal-close" id="invite-modal-close" aria-label="Close">&times;</button>
-    <img src="images/Rixon-feno.png" alt="15th Anniversary Invitation" class="invite-modal-img">
+    <img src="images/Rixon_feno_4.png" alt="15th Anniversary Invitation" class="invite-modal-img">
   </div>
 </div>
 
@@ -572,7 +678,7 @@
   <div class="diamond"></div>
   <div class="rule"></div>
   <div class="signature">Rixon &amp; Feno</div>
-  <div class="design-credit">Designed by Diginest</div>
+  <div class="design-credit">&copy; 2026 Diginest-TVL. All Rights Reserved.</div>
 </footer>
 
 <div class="music-panel has-track" id="music-panel">
@@ -580,9 +686,8 @@
     <svg id="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
     <svg id="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
   </button>
-  <span class="music-label" id="music-label"></span>
 </div>
-<audio id="bg-audio" loop src="Isaikaruvi _ இசைக்கருவி - Solomon Jakkim (Official Music Video).mp3"></audio>
+<audio id="bg-audio" loop playsinline preload="auto" src="[trimmed] Perfect.mp3"></audio>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -591,7 +696,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-4RWHJZWBLX');
 </script>
 
@@ -601,55 +705,174 @@ const playToggle = document.getElementById('play-toggle');
 const playIcon = document.getElementById('play-icon');
 const pauseIcon = document.getElementById('pause-icon');
 audio.volume = 0.55;
-
-const popupOverlay = document.getElementById('welcome-popup');
-const enterBtn = document.getElementById('enter-btn');
 let musicStarted = false;
 
-enterBtn.addEventListener('click', () => {
-  popupOverlay.style.opacity = '0';
-  setTimeout(() => {
-    popupOverlay.style.visibility = 'hidden';
-    document.body.classList.remove('no-scroll');
-    if (window.ScrollTrigger) ScrollTrigger.refresh();
-  }, 1000); 
-
-  if (!musicStarted && audio.paused) {
-    audio.play().then(() => {
-      playIcon.style.display = 'none';
-      pauseIcon.style.display = 'block';
-      musicStarted = true;
-    }).catch(err => console.log("Autoplay prevented:", err));
-  }
+// Tie icons strictly to actual audio events to eliminate flicker
+audio.addEventListener('play', () => {
+  playIcon.style.display = 'none';
+  pauseIcon.style.display = 'block';
 });
+
+audio.addEventListener('pause', () => {
+  playIcon.style.display = 'block';
+  pauseIcon.style.display = 'none';
+});
+
+function handleAudioPlay() {
+  if (!musicStarted) {
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        musicStarted = true;
+      }).catch(err => {
+        console.log("Autoplay prevented:", err);
+      });
+    }
+  }
+}
+
+window.addEventListener('load', handleAudioPlay);
+document.addEventListener('touchstart', handleAudioPlay, { once: true });
+document.addEventListener('click', handleAudioPlay, { once: true });
+document.addEventListener('scroll', handleAudioPlay, { once: true });
 
 playToggle.addEventListener('click', (e) => {
   e.stopPropagation();
   musicStarted = true; 
   
   if (audio.paused){
-    audio.play();
-    playIcon.style.display = 'none';
-    pauseIcon.style.display = 'block';
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(err => console.log(err));
+    }
   } else {
     audio.pause();
-    playIcon.style.display = 'block';
-    pauseIcon.style.display = 'none';
   }
 });
+
+// Wind Glitter Effect for the number 15
+function spawnNumberParticle() {
+  const container = document.getElementById('hero-num-container');
+  if (!container) return;
+
+  const p = document.createElement('div');
+  p.className = 'num-glitter';
+
+  // Random starting position roughly within the bounds of the text
+  p.style.left = (Math.random() * 80 + 10) + '%';
+  p.style.top = (Math.random() * 70 + 15) + '%';
+
+  // Wind direction: Flowing from bottom-left to top-right
+  // Positive X (right) and Negative Y (up)
+  const windX = (Math.random() * 60 + 80) + 'px';   
+  const windY = -(Math.random() * 80 + 0) + 'px'; 
+
+  p.style.setProperty('--wind-x', windX);
+  p.style.setProperty('--wind-y', windY);
+
+  // Random size
+  const size = Math.random() * 3 + 2; 
+  p.style.width = size + 'px';
+  p.style.height = size + 'px';
+
+  // Random duration
+  const duration = Math.random() * 2 + 1.5; 
+  p.style.animationDuration = duration + 's';
+
+  container.appendChild(p);
+
+  setTimeout(() => {
+    if (p.parentNode) p.remove();
+  }, duration * 1000);
+}
+
+// Generate glitter particles continuously
+setInterval(spawnNumberParticle, 80);
+
 
 const inviteModal = document.getElementById('invite-modal');
 const viewInviteBtn = document.getElementById('view-invite-btn');
 const inviteModalClose = document.getElementById('invite-modal-close');
 
+let snowInterval;
+let snowContainer;
+
+function startSnowfall() {
+  if (snowContainer) {
+    snowContainer.remove();
+  }
+  clearInterval(snowInterval);
+
+  snowContainer = document.createElement('div');
+  snowContainer.className = 'particles-container';
+  
+  const flash = document.createElement('div');
+  flash.className = 'flash-overlay';
+  snowContainer.appendChild(flash);
+  
+  document.body.appendChild(snowContainer);
+
+  for (let i = 0; i < 70; i++) {
+    spawnParticle(true);
+  }
+
+  snowInterval = setInterval(() => {
+    spawnParticle(false);
+  }, 250);
+}
+
+function spawnParticle(isBurst) {
+  if (!snowContainer) return;
+  const p = document.createElement('div');
+  p.className = 'particle';
+  
+  p.style.left = Math.random() * 100 + 'vw';
+  
+  const size = Math.random() * 5 + 3;
+  p.style.width = size + 'px';
+  p.style.height = size + 'px';
+  
+  const duration = isBurst ? (Math.random() * 3 + 3) : (Math.random() * 5 + 6);
+  p.style.animationDuration = duration + 's';
+  
+  const delay = isBurst ? (Math.random() * 2) : 0;
+  p.style.animationDelay = delay + 's';
+  
+  const sway = (Math.random() * 120 - 60) + 'px';
+  p.style.setProperty('--sway', sway);
+  
+  snowContainer.appendChild(p);
+  
+  setTimeout(() => {
+    if (p.parentNode) p.remove();
+  }, (duration + delay) * 1000);
+}
+
+function clearSnowfall() {
+  clearInterval(snowInterval);
+  if (snowContainer) {
+    snowContainer.style.transition = 'opacity 0.6s';
+    snowContainer.style.opacity = '0';
+    setTimeout(() => {
+      if (snowContainer) {
+        snowContainer.remove();
+        snowContainer = null;
+      }
+    }, 600);
+  }
+}
+
 function openInviteModal(){
   inviteModal.classList.add('open');
   document.body.classList.add('no-scroll');
+  startSnowfall();
 }
+
 function closeInviteModal(){
+  inviteModal.classList.remove('remove');
   inviteModal.classList.remove('open');
-  if (popupOverlay.style.visibility !== 'hidden') return; 
   document.body.classList.remove('no-scroll');
+  clearSnowfall();
 }
 
 viewInviteBtn.addEventListener('click', openInviteModal);
@@ -661,12 +884,6 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && inviteModal.classList.contains('open')) closeInviteModal();
 });
 
-setTimeout(() => {
-  if (popupOverlay.style.visibility !== 'hidden') {
-    document.body.classList.remove('no-scroll');
-  }
-}, 6000);
-
 if (window.gsap && window.ScrollTrigger) {
   gsap.registerPlugin(ScrollTrigger);
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -675,18 +892,9 @@ if (window.gsap && window.ScrollTrigger) {
   gsap.from(".hero-num", { opacity:0, y:24, duration:1.1, delay:0.35, ease:"power3.out" });
   gsap.from(".hero-sub", { opacity:0, duration:1, delay:0.65 });
   gsap.from(".hero-names", { opacity:0, y:16, duration:1, delay:0.8, ease:"power2.out" });
+  gsap.from(".hero .rule", { opacity:0, width:0, duration:1, delay:0.9 });
   gsap.from(".hero-tag", { opacity:0, y:10, duration:1, delay:1.05 });
   gsap.from(".scroll-cue", { opacity:0, duration:1, delay:1.3 });
-
-  gsap.to(".hero", {
-    opacity: 0,
-    scrollTrigger: { 
-      trigger: "#details", 
-      start: "top bottom", 
-      end: "top center", 
-      scrub: true 
-    }
-  });
 
   gsap.from(".details .eyebrow, .details h2, .details .rule", {
     opacity:0, y:20, duration:0.9, stagger:0.08, ease:"power2.out",
@@ -700,6 +908,10 @@ if (window.gsap && window.ScrollTrigger) {
     opacity:0, y:18, duration:0.8, stagger:0.1, ease:"power2.out",
     scrollTrigger:{ trigger:".detail-grid", start:"top 82%" }
   });
+  gsap.from(".map-wrapper", {
+    opacity:0, y:20, duration:0.9, ease:"power2.out",
+    scrollTrigger:{ trigger:".map-wrapper", start:"top 85%" }
+  });
   gsap.from("footer .quote, footer .diamond, footer .rule, footer .signature, footer .design-credit", {
     opacity:0, y:14, duration:0.9, stagger:0.08,
     scrollTrigger:{ trigger:"footer", start:"top 85%" }
@@ -709,8 +921,6 @@ if (window.gsap && window.ScrollTrigger) {
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => ScrollTrigger.refresh());
   }
-} else {
-  console.log("GSAP not available — animations skipped, core page still functional.");
 }
 </script>
 </body>
