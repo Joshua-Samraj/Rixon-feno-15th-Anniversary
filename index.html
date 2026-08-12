@@ -748,8 +748,8 @@ function spawnNumberParticle() {
 
   // Wind direction: Flowing from bottom-left to top-right
   // Positive X (right) and Negative Y (up)
-  const windX = (Math.random() * 60 + 80) + 'px';   
-  const windY = -(Math.random() * 80 + 100) + 'px'; 
+  const windX = (Math.random() * 60 + 160) + 'px';   
+  const windY = -(Math.random() * 80 + 10) + 'px'; 
 
   p.style.setProperty('--wind-x', windX);
   p.style.setProperty('--wind-y', windY);
@@ -771,7 +771,7 @@ function spawnNumberParticle() {
 }
 
 // Generate glitter particles continuously
-setInterval(spawnNumberParticle, 250);
+setInterval(spawnNumberParticle, 80);
 
 
 const inviteModal = document.getElementById('invite-modal');
