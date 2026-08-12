@@ -365,6 +365,24 @@
     color: var(--gold-bright); 
   }
 
+  .map-wrapper {
+    margin: 34px auto 0;
+    width: 100%;
+    max-width: 600px;
+    border: 2px solid var(--gold-bright);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    background: var(--maroon-deep);
+  }
+
+  .map-wrapper iframe {
+    width: 100%;
+    height: 320px;
+    display: block;
+    border: 0;
+  }
+
   .action-buttons {
     display: flex;
     gap: 16px;
@@ -527,6 +545,10 @@
     .action-btn { width: 100%; text-align: center; }
     .view-invite-btn{ width:100%; }
 
+    .map-wrapper iframe {
+      height: 260px;
+    }
+
     footer{ padding:8vh 7vw 10vh; }
   }
 
@@ -589,6 +611,10 @@
         <div class="label">Venue</div>
         <div class="value">Devi mini hall, Tirunelveli</div>
       </div>
+    </div>
+
+    <div class="map-wrapper">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3943.926544791163!2d77.73446367501496!3d8.698525891350215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b041305ba295d35%3A0x8f8e7f5a18718111!2sDevi%20Mini%20Hall!5e0!3m2!1sen!2sin!4v1786550053677!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
 
     <div class="action-buttons">
@@ -788,6 +814,10 @@ if (window.gsap && window.ScrollTrigger) {
   gsap.from(".detail-item", {
     opacity:0, y:18, duration:0.8, stagger:0.1, ease:"power2.out",
     scrollTrigger:{ trigger:".detail-grid", start:"top 82%" }
+  });
+  gsap.from(".map-wrapper", {
+    opacity:0, y:20, duration:0.9, ease:"power2.out",
+    scrollTrigger:{ trigger:".map-wrapper", start:"top 85%" }
   });
   gsap.from("footer .quote, footer .diamond, footer .rule, footer .signature, footer .design-credit", {
     opacity:0, y:14, duration:0.9, stagger:0.08,
