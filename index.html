@@ -495,6 +495,7 @@
     padding:6px;
     box-shadow:0 8px 24px rgba(62,8,16,0.18);
     font-family:'Jost', sans-serif;
+    transform: translateZ(0); /* Prevents layout rendering flicker */
   }
   .music-btn{
     width:40px; height:40px;
@@ -506,9 +507,11 @@
     cursor:pointer;
     flex-shrink:0;
     transition:background .2s ease, transform .2s ease;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
   }
   .music-btn:hover{ background:var(--maroon-deep); transform:scale(1.05); }
-  .music-btn svg{ width:16px; height:16px; }
+  .music-btn svg{ width:16px; height:16px; pointer-events: none; } /* Added pointer-events:none to stop child event interference */
   .music-label{
     max-width:0;
     overflow:hidden;
@@ -704,13 +707,27 @@ const pauseIcon = document.getElementById('pause-icon');
 audio.volume = 0.55;
 let musicStarted = false;
 
+// Tie icons strictly to actual audio events to eliminate flicker
+audio.addEventListener('play', () => {
+  playIcon.style.display = 'none';
+  pauseIcon.style.display = 'block';
+});
+
+audio.addEventListener('pause', () => {
+  playIcon.style.display = 'block';
+  pauseIcon.style.display = 'none';
+});
+
 function handleAudioPlay() {
   if (!musicStarted) {
-    audio.play().then(() => {
-      playIcon.style.display = 'none';
-      pauseIcon.style.display = 'block';
-      musicStarted = true;
-    }).catch(err => console.log(err));
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        musicStarted = true;
+      }).catch(err => {
+        console.log("Autoplay prevented:", err);
+      });
+    }
   }
 }
 
@@ -724,13 +741,12 @@ playToggle.addEventListener('click', (e) => {
   musicStarted = true; 
   
   if (audio.paused){
-    audio.play();
-    playIcon.style.display = 'none';
-    pauseIcon.style.display = 'block';
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(err => console.log(err));
+    }
   } else {
     audio.pause();
-    playIcon.style.display = 'block';
-    pauseIcon.style.display = 'none';
   }
 });
 
@@ -748,8 +764,8 @@ function spawnNumberParticle() {
 
   // Wind direction: Flowing from bottom-left to top-right
   // Positive X (right) and Negative Y (up)
-  const windX = (Math.random() * 60 + 160) + 'px';   
-  const windY = -(Math.random() * 80 + 10) + 'px'; 
+  const windX = (Math.random() * 60 + 80) + 'px';   
+  const windY = -(Math.random() * 80 + 0) + 'px'; 
 
   p.style.setProperty('--wind-x', windX);
   p.style.setProperty('--wind-y', windY);
