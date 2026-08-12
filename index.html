@@ -79,14 +79,13 @@
   .hero{
     position:relative;
     z-index:1;
-    min-height:100vh;
-    min-height:100svh;
+    min-height:auto;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:6vh 6vw;
+    padding:8vh 6vw 4vh;
     border-bottom:1px solid rgba(94,14,26,0.12);
   }
   .hero::before, .hero::after{
@@ -96,7 +95,7 @@
     width:min(86vw, 640px);
     opacity:0.45;
   }
-  .hero::before{ top:5vh; height:calc(90svh - 10vh); border-bottom:none;
+  .hero::before{ top:5vh; height:calc(100% - 10vh); border-bottom:none;
     clip-path: polygon(0 0, 100% 0, 100% 6%, 0 6%, 0 94%, 100% 94%, 100% 100%, 0 100%);
   }
   .hero-mono{
@@ -160,6 +159,7 @@
   .hero-tag{
     max-width:520px;
     margin-top:26px;
+    margin-bottom:0;
     font-size:1.15rem;
     line-height:1.7;
     color:var(--ink);
@@ -193,7 +193,7 @@
 
   .details{
     position:relative;
-    padding:14vh 6vw 16vh;
+    padding:6vh 6vw 16vh;
     background:var(--maroon);
     color:var(--ivory);
     text-align:center;
@@ -223,21 +223,55 @@
     letter-spacing:0.2em;
     text-transform:uppercase;
     font-size:0.9rem;
-    font-weight:500;
+    font-weight:600;
     padding:18px 44px;
-    border:2px solid var(--gold-bright);
-    background:transparent;
+    background:var(--maroon);
     color:var(--ivory);
     cursor:pointer;
     transition:all 0.3s ease;
-    border-radius:4px;
+    border-radius:6px;
     margin:10px auto 34px;
     display:inline-block;
+    position:relative;
+    z-index:1;
+    overflow:hidden;
+    border:none;
+  }
+  .view-invite-btn::before{
+    content:'';
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:350px;
+    height:350px;
+    margin-top:-175px;
+    margin-left:-175px;
+    background:conic-gradient(transparent, var(--gold-bright), var(--gold), transparent 40%);
+    animation:borderRotate 2.5s linear infinite;
+    z-index:-2;
+  }
+  .view-invite-btn::after{
+    content:'';
+    position:absolute;
+    inset:4px;
+    background:var(--maroon);
+    border-radius:3px;
+    z-index:-1;
+    transition:background 0.3s ease;
+  }
+  @keyframes borderRotate {
+    0% {
+      transform:rotate(0deg);
+    }
+    100% {
+      transform:rotate(360deg);
+    }
+  }
+  .view-invite-btn:hover::after{
+    background:var(--gold-bright);
   }
   .view-invite-btn:hover{
-    background:var(--gold-bright);
     color:var(--maroon-deep);
-    border-color:var(--gold-bright);
   }
 
   .invite-modal{
@@ -434,7 +468,6 @@
     padding:0 10px 0 4px;
   }
 
-  /* --- Flash & Snow Particles Styles --- */
   .particles-container {
     position: fixed;
     top: 0; left: 0;
@@ -460,12 +493,11 @@
 
   .particle {
     position: absolute;
-    top: -50px; /* Start completely off-screen to avoid pooling at the top */
-    opacity: 0; /* Hidden before animation starts */
+    top: -50px;
+    opacity: 0;
     background: var(--gold-bright);
     border-radius: 50%;
     box-shadow: 0 0 6px var(--gold-bright);
-    /* 'both' ensures it remains invisible during the animation delay phase */
     animation: snowfall linear both;
   }
 
@@ -482,12 +514,12 @@
   }
 
   @media (max-width: 768px){
-    .hero{ padding:8vh 7vw; }
-    .hero::before{ top:4vh; height:calc(92svh - 8vh); }
+    .hero{ padding:6vh 7vw 3vh; }
+    .hero::before{ top:4vh; height:calc(100% - 8vh); }
     .hero-mono{ letter-spacing:0.3em; }
     .hero-tag{ font-size:1.05rem; max-width:340px; }
 
-    .details{ padding:11vh 7vw 12vh; }
+    .details{ padding:5vh 7vw 12vh; }
     .invite-line{ font-size:1.15rem; margin:0 0 32px; }
     .detail-grid{ gap:22px; padding:26px 0; }
     .detail-item .value{ font-size:1.2rem; }
@@ -501,7 +533,7 @@
   @media (max-width: 480px){
     .hero {
       justify-content: flex-start;
-      padding-top: 10vh;
+      padding-top: 6vh;
     }
     .hero-num{ font-size:7.6rem }
     .hero-mono{ font-size:0.85rem; letter-spacing:0.22em; }
@@ -533,10 +565,6 @@
     <div class="hero-sub">Year of Enduring Love</div>
     <div class="hero-names">Rixon <span class="amp">&amp;</span> Feno</div>
     <p class="hero-tag">A milestone of devotion, trust, and crystal-clear love. Join us to honor fifteen beautiful years and the countless memories yet to be made.</p>
-    <div class="scroll-cue">
-      <span>Scroll to begin</span>
-      <span class="line"></span>
-    </div>
   </section>
 </div>
 
@@ -593,7 +621,7 @@
   </button>
   <span class="music-label" id="music-label"></span>
 </div>
-<audio id="bg-audio" loop src="Isaikaruvi _ இசைக்கருவி - Solomon Jakkim (Official Music Video).mp3"></audio>
+<audio id="bg-audio" loop src="Perfect.mp3"></audio>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -654,20 +682,16 @@ function startSnowfall() {
   snowContainer = document.createElement('div');
   snowContainer.className = 'particles-container';
   
-  // Add the bright flash overlay
   const flash = document.createElement('div');
   flash.className = 'flash-overlay';
   snowContainer.appendChild(flash);
   
   document.body.appendChild(snowContainer);
 
-  // Initial heavy burst (flash) of particles
-  // Randomizing their delay strongly prevents the "pooling at top" effect
   for (let i = 0; i < 70; i++) {
     spawnParticle(true);
   }
 
-  // Continue with a steady, relaxed snowfall
   snowInterval = setInterval(() => {
     spawnParticle(false);
   }, 250);
@@ -687,8 +711,6 @@ function spawnParticle(isBurst) {
   const duration = isBurst ? (Math.random() * 3 + 3) : (Math.random() * 5 + 6);
   p.style.animationDuration = duration + 's';
   
-  // By spreading the delay smoothly, particles fall one after another 
-  // instead of waiting in a clump at the top
   const delay = isBurst ? (Math.random() * 2) : 0;
   p.style.animationDelay = delay + 's';
   
@@ -723,6 +745,7 @@ function openInviteModal(){
 }
 
 function closeInviteModal(){
+  inviteModal.classList.remove('remove');
   inviteModal.classList.remove('open');
   document.body.classList.remove('no-scroll');
   clearSnowfall();
