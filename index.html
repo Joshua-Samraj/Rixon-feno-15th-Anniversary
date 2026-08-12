@@ -621,7 +621,7 @@
   </button>
   <span class="music-label" id="music-label"></span>
 </div>
-<audio id="bg-audio" loop src="Perfect.mp3"></audio>
+<audio id="bg-audio" loop playsinline preload="auto" src="[trimmed] Perfect.mp3"></audio>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -641,15 +641,20 @@ const pauseIcon = document.getElementById('pause-icon');
 audio.volume = 0.55;
 let musicStarted = false;
 
-document.body.addEventListener('click', () => {
-  if (!musicStarted && audio.paused) {
+function handleAudioPlay() {
+  if (!musicStarted) {
     audio.play().then(() => {
       playIcon.style.display = 'none';
       pauseIcon.style.display = 'block';
       musicStarted = true;
     }).catch(err => console.log(err));
   }
-}, { once: true });
+}
+
+window.addEventListener('load', handleAudioPlay);
+document.addEventListener('touchstart', handleAudioPlay, { once: true });
+document.addEventListener('click', handleAudioPlay, { once: true });
+document.addEventListener('scroll', handleAudioPlay, { once: true });
 
 playToggle.addEventListener('click', (e) => {
   e.stopPropagation();
